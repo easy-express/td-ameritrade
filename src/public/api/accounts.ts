@@ -1,5 +1,3 @@
-import { instance } from '../public/TDAmeitradeModule';
-
 /**
  * Gets account info for a single account. You can request additional fields with .fields as a comma-separated string.
  * Possible values for fields are: positions, orders
@@ -7,8 +5,8 @@ import { instance } from '../public/TDAmeitradeModule';
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getAccount = async (accountID: string, fields?: string) => {
-  return instance?.getQuery(`/v1/accounts/${accountID}` + (fields ? `?fields=${fields}` : ''));
+export const getAccount = (accountID: string, fields?: string) => {
+  return `/v1/accounts/${accountID}` + (fields ? `?fields=${fields}` : '');
 };
 
 /**
@@ -18,6 +16,6 @@ export const getAccount = async (accountID: string, fields?: string) => {
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getAccounts = async (fields?: string) => {
-  return instance?.getQuery(`/v1/accounts` + (fields ? `?fields=${fields}` : ''));
+export const getAccounts = (fields?: string) => {
+  return `/v1/accounts` + (fields ? `?fields=${fields}` : '');
 };

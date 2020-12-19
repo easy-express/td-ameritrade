@@ -1,5 +1,3 @@
-import { instance } from '../public/TDAmeitradeModule';
-
 /**
  * Defines what range of strikes to return as results
  * @default ALL
@@ -114,23 +112,23 @@ type OptionChainConfig = {
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getOptionChain = async (config: OptionChainConfig, apikey: string) => {
-  return instance?.getQuery(
+export const getOptionChain = (config: OptionChainConfig, apikey: string) => {
+  return (
     `/v1/marketdata/chains?` +
-      `symbol=${config.symbol}` +
-      `&contractType=${config.contractType}` +
-      `&expMonth=${config.expMonth}` +
-      `&optionType=${config.optionType}` +
-      `&strategy=${config.strategy}` +
-      `&range=${config.range}` +
-      `&includeQuotes=${config.includeQuotes}` +
-      (config.fromDate ? `&fromDate=${config.fromDate}` : '') +
-      (config.toDate ? `&toDate=${config.toDate}` : '') +
-      (config.strikeCount ? `&strikeCount=${config.strikeCount}` : '') +
-      (config.interval ? `&interval=${config.interval}` : '') +
-      (config.volatility ? `&volatility=${config.volatility}` : '') +
-      (config.underlyingPrice ? `&underlyingPrice=${config.underlyingPrice}` : '') +
-      (config.interestRate ? `&interestRate=${config.interestRate}` : '') +
-      (config.daysToExpiration ? `&daysToExpiration=${config.daysToExpiration}` : ''),
+    `symbol=${config.symbol}` +
+    `&contractType=${config.contractType}` +
+    `&expMonth=${config.expMonth}` +
+    `&optionType=${config.optionType}` +
+    `&strategy=${config.strategy}` +
+    `&range=${config.range}` +
+    `&includeQuotes=${config.includeQuotes}` +
+    (config.fromDate ? `&fromDate=${config.fromDate}` : '') +
+    (config.toDate ? `&toDate=${config.toDate}` : '') +
+    (config.strikeCount ? `&strikeCount=${config.strikeCount}` : '') +
+    (config.interval ? `&interval=${config.interval}` : '') +
+    (config.volatility ? `&volatility=${config.volatility}` : '') +
+    (config.underlyingPrice ? `&underlyingPrice=${config.underlyingPrice}` : '') +
+    (config.interestRate ? `&interestRate=${config.interestRate}` : '') +
+    (config.daysToExpiration ? `&daysToExpiration=${config.daysToExpiration}` : '')
   );
 };

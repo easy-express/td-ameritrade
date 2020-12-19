@@ -99,12 +99,20 @@ export class TDAmeritradeModule implements IEasyExpressAttachableModule {
    * Submits a GET query to TD Ameritrade's api.
    * @param query the query to submit
    */
-  public getQuery(query: string): Promise<any> {
+  public getQuery(query: string, access_token?: string): Promise<any> {
     return axios
-      .get(`api.tdameritrade.com${query}`)
+      .get(
+        `https://api.tdameritrade.com${query}`,
+        access_token
+          ? {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
+              },
+            }
+          : undefined,
+      )
       .then((result) => result.data)
       .catch((e) => {
-        console.log(e);
         return e;
       });
   }

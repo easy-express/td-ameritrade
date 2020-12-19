@@ -1,5 +1,3 @@
-import { instance } from '../public/TDAmeitradeModule';
-
 /**
  * Get quotes for a single symbol, e.g. AAPL
  * Can optionally use apikey for delayed data with an unauthenticated request.
@@ -7,8 +5,8 @@ import { instance } from '../public/TDAmeitradeModule';
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getQuote = async (symbol: string, apikey: string) => {
-  return instance?.getQuery(`/v1/marketdata/${symbol}/quotes` + (apikey ? `&apikey=${apikey}` : ''));
+export const getQuote = (symbol: string, apikey: string) => {
+  return `/v1/marketdata/${symbol}/quotes` + (apikey ? `&apikey=${apikey}` : '');
 };
 
 /**
@@ -18,6 +16,6 @@ export const getQuote = async (symbol: string, apikey: string) => {
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getQuotes = async (symbols: string, apikey: string) => {
-  return instance?.getQuery(`/v1/marketdata/quotes?symbol=${symbols}` + (apikey ? `&apikey=${apikey}` : ''));
+export const getQuotes = (symbols: string, apikey: string) => {
+  return `/v1/marketdata/quotes?symbol=${symbols}` + (apikey ? `&apikey=${apikey}` : '');
 };

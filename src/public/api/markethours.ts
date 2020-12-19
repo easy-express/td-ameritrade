@@ -1,5 +1,3 @@
-import { instance } from '../public/TDAmeitradeModule';
-
 enum MARKETS {
   EQUITY = 'EQUITY',
   OPTION = 'OPTION',
@@ -15,8 +13,8 @@ enum MARKETS {
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getSingleMarketHours = async (market: MARKETS, date: string, apikey: string) => {
-  return instance?.getQuery(`/v1/marketdata/${market}/hours?date=${date}` + (apikey ? `?apikey=${apikey}` : ''));
+export const getSingleMarketHours = (market: MARKETS, date: string, apikey: string) => {
+  return `/v1/marketdata/${market}/hours?date=${date}` + (apikey ? `?apikey=${apikey}` : '');
 };
 
 /**
@@ -26,12 +24,10 @@ export const getSingleMarketHours = async (market: MARKETS, date: string, apikey
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getMultipleMarketHours = async (markets: MARKETS[], date: string, apikey: string) => {
+export const getMultipleMarketHours = (markets: MARKETS[], date: string, apikey: string) => {
   var marketsStr = '';
   markets.forEach((market) => {
     marketsStr += market.toString();
   });
-  return instance?.getQuery(
-    `/v1/marketdata/hours?markets=${marketsStr}&date=${date}` + (apikey ? `?apikey=${apikey}` : ''),
-  );
+  return `/v1/marketdata/hours?markets=${marketsStr}&date=${date}` + (apikey ? `?apikey=${apikey}` : '');
 };

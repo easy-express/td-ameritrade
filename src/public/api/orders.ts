@@ -1,5 +1,3 @@
-import { instance } from '../public/TDAmeitradeModule';
-
 /**
  * Enum for order statuses, to use when retrieving account orders.
  * @enum
@@ -29,19 +27,19 @@ enum ORDER_STATUS {
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getOrdersByAccount = async (
+export const getOrdersByAccount = (
   accountId?: string,
   maxResults?: number,
   fromEnteredTime?: string,
   toEnteredTime?: string,
   status?: ORDER_STATUS,
 ) => {
-  return instance?.getQuery(
+  return (
     `/v1/accounts/${accountId}/orders?` +
-      (maxResults ? `maxResults=${maxResults}&` : '') +
-      (fromEnteredTime ? `fromEnteredTime=${fromEnteredTime}&` : '') +
-      (toEnteredTime ? `toEnteredTime=${toEnteredTime}&` : '') +
-      (status ? `status=${status}` : ''),
+    (maxResults ? `maxResults=${maxResults}&` : '') +
+    (fromEnteredTime ? `fromEnteredTime=${fromEnteredTime}&` : '') +
+    (toEnteredTime ? `toEnteredTime=${toEnteredTime}&` : '') +
+    (status ? `status=${status}` : '')
   );
 };
 
@@ -52,20 +50,20 @@ export const getOrdersByAccount = async (
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getOrdersByQuery = async (
+export const getOrdersByQuery = (
   accountId?: string,
   maxResults?: number,
   fromEnteredTime?: string,
   toEnteredTime?: string,
   status?: ORDER_STATUS,
 ) => {
-  return instance?.getQuery(
+  return (
     `/v1/orders?` +
-      (accountId ? `accountId=${accountId}&` : '') +
-      (maxResults ? `maxResults=${maxResults}&` : '') +
-      (fromEnteredTime ? `fromEnteredTime=${fromEnteredTime}&` : '') +
-      (toEnteredTime ? `toEnteredTime=${toEnteredTime}&` : '') +
-      (status ? `status=${status}` : ''),
+    (accountId ? `accountId=${accountId}&` : '') +
+    (maxResults ? `maxResults=${maxResults}&` : '') +
+    (fromEnteredTime ? `fromEnteredTime=${fromEnteredTime}&` : '') +
+    (toEnteredTime ? `toEnteredTime=${toEnteredTime}&` : '') +
+    (status ? `status=${status}` : '')
   );
 };
 
@@ -75,6 +73,6 @@ export const getOrdersByQuery = async (
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getOrder = async (accountId: string, orderId: string) => {
-  return instance?.getQuery(`/v1/accounts/${accountId}/orders/${orderId}`);
+export const getOrder = (accountId: string, orderId: string) => {
+  return `/v1/accounts/${accountId}/orders/${orderId}`;
 };

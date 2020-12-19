@@ -1,5 +1,3 @@
-import { instance } from '../public/TDAmeitradeModule';
-
 enum PROJECTION_TYPE {
   SYMBOL_SEARCH = 'symbol-search',
   SYMBOL_REGEX = 'symbol-regex',
@@ -16,10 +14,8 @@ enum PROJECTION_TYPE {
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const searchInstruments = async (symbol: string, projection: PROJECTION_TYPE, apikey: string) => {
-  return instance?.getQuery(
-    `/v1/instruments?symbol=${symbol}&projection=${projection}` + (apikey ? `?apikey=${apikey}` : ''),
-  );
+export const searchInstruments = (symbol: string, projection: PROJECTION_TYPE, apikey: string) => {
+  return `/v1/instruments?symbol=${symbol}&projection=${projection}` + (apikey ? `?apikey=${apikey}` : '');
 };
 
 /**
@@ -30,6 +26,6 @@ export const searchInstruments = async (symbol: string, projection: PROJECTION_T
  * @returns {Promise<Object>} api GET result
  * @async
  */
-export const getInstrument = async (cusip: string, apikey: string) => {
-  return instance?.getQuery(`/v1/instruments/${cusip}` + (apikey ? `?apikey=${apikey}` : ''));
+export const getInstrument = (cusip: string, apikey: string) => {
+  return `/v1/instruments/${cusip}` + (apikey ? `?apikey=${apikey}` : '');
 };
