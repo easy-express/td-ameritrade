@@ -7,7 +7,7 @@ export type Token = {
   refresh_token: string;
 };
 
-export var tdInstance: TDAmeritradeModule | undefined;
+export let tdInstance: TDAmeritradeModule | undefined;
 
 /**
  * A module that helps integrate TD Ameritrade's API into your Easy-Express Server.

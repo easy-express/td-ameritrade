@@ -96,7 +96,7 @@ export const getAccount = async (
  * @param {ACCOUNT_FIELD} fields the additional fields to get from the account
  * @returns {string} the accounts
  */
-export const getAccounts = async (accessToken: string, fields?: ACCOUNT_FIELD[]): Promise<Array<Account>> => {
+export const getAccounts = async (accessToken: string, fields?: ACCOUNT_FIELD[]): Promise<Account[]> => {
   let field = '';
   fields?.forEach((f) => (field += f + ','));
   field = field.substr(0, field.length - 1);
