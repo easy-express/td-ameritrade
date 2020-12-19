@@ -10,6 +10,8 @@
 
 > A module that helps integrate TD Ameritrade's API into your Easy-Express Server.
 
+NOTE: This is a work in progress, and was created for my own personal use. Likewise, this module does NOT support everything that TD Ameritrade's API has to offer--I only implemented what I needed, but if you want to add to it let me know.
+
 ### 🏠 [Homepage](https://github.com/easy-express/td-ameritrade#readme)
 
 ## Introduction
