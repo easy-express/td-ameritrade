@@ -4,7 +4,7 @@ import qs from 'qs';
 
 export type Token = {
   accessToken: string;
-  refresh_token: string;
+  refreshToken: string;
 };
 
 export let tdInstance: TDAmeritradeModule | undefined;
@@ -73,8 +73,8 @@ export class TDAmeritradeModule implements IEasyExpressAttachableModule {
     })
       .then((res) => {
         return {
-          accessToken: res.data.accessToken,
-          refresh_token: res.data.refresh_token,
+          accessToken: res.data.access_token,
+          refreshToken: res.data.refresh_token,
         };
       })
       .catch((error) => {
