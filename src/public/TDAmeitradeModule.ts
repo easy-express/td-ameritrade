@@ -7,6 +7,8 @@ export type Token = {
   refresh_token: string;
 };
 
+export var instance: TDAmeritradeModule | undefined;
+
 /**
  * A module that helps integrate TD Ameritrade's API into your Easy-Express Server.
  */
@@ -21,8 +23,13 @@ export class TDAmeritradeModule implements IEasyExpressAttachableModule {
    * @param clientID the TD Ameritrade app's client id.
    */
   constructor(redirectURI: string, clientID: string) {
+    if (instance !== undefined) {
+      throw new Error('A TD Ameritrade Module was already created.');
+    }
+
     this.redirectURI = redirectURI;
     this.clientID = clientID;
+    instance = this;
   }
 
   /**
@@ -86,5 +93,19 @@ export class TDAmeritradeModule implements IEasyExpressAttachableModule {
       client_id: this.clientID,
       redirect_uri: this.redirectURI,
     });
+  }
+
+  /**
+   * Submits a GET query to TD Ameritrade's api.
+   * @param query the query to submit
+   */
+  public getQuery(query: string): Promise<any> {
+    return axios
+      .get(`api.tdameritrade.com${query}`)
+      .then((result) => result.data)
+      .catch((e) => {
+        console.log(e);
+        return e;
+      });
   }
 }

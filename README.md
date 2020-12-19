@@ -12,6 +12,8 @@
 
 NOTE: This is a work in progress, and was created for my own personal use. Likewise, this module does NOT support everything that TD Ameritrade's API has to offer--I only implemented what I needed, but if you want to add to it let me know.
 
+Inspired by https://github.com/Sainglend/tda-api-client
+
 ### 🏠 [Homepage](https://github.com/easy-express/td-ameritrade#readme)
 
 ## Introduction

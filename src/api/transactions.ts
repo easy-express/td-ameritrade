@@ -1,3 +1,5 @@
+import { instance } from '../public/TDAmeitradeModule';
+
 /**
  * Enum for the transaction types
  * @enum
@@ -28,12 +30,12 @@ export const getTransactions = async (
   endDate?: string,
   symbol?: string,
 ) => {
-  return (
+  return instance?.getQuery(
     `/v1/accounts/${accountId}/transactions?` +
-    (type ? `type=${type}&` : '') +
-    (startDate ? `startDate=${startDate}&` : '') +
-    (endDate ? `endDate=${endDate}&` : '') +
-    (symbol ? `symbol=${symbol}` : '')
+      (type ? `type=${type}&` : '') +
+      (startDate ? `startDate=${startDate}&` : '') +
+      (endDate ? `endDate=${endDate}&` : '') +
+      (symbol ? `symbol=${symbol}` : ''),
   );
 };
 
@@ -44,5 +46,5 @@ export const getTransactions = async (
  * @async
  */
 export const getTransaction = async (accountId: string, transactionId: string) => {
-  return `/v1/accounts/${accountId}/transactions/${transactionId}`;
+  return instance?.getQuery(`/v1/accounts/${accountId}/transactions/${transactionId}`);
 };

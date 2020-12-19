@@ -1,3 +1,5 @@
+import { instance } from '../public/TDAmeitradeModule';
+
 /**
  * Enum for order statuses, to use when retrieving account orders.
  * @enum
@@ -34,12 +36,12 @@ export const getOrdersByAccount = async (
   toEnteredTime?: string,
   status?: ORDER_STATUS,
 ) => {
-  return (
+  return instance?.getQuery(
     `/v1/accounts/${accountId}/orders?` +
-    (maxResults ? `maxResults=${maxResults}&` : '') +
-    (fromEnteredTime ? `fromEnteredTime=${fromEnteredTime}&` : '') +
-    (toEnteredTime ? `toEnteredTime=${toEnteredTime}&` : '') +
-    (status ? `status=${status}` : '')
+      (maxResults ? `maxResults=${maxResults}&` : '') +
+      (fromEnteredTime ? `fromEnteredTime=${fromEnteredTime}&` : '') +
+      (toEnteredTime ? `toEnteredTime=${toEnteredTime}&` : '') +
+      (status ? `status=${status}` : ''),
   );
 };
 
@@ -57,13 +59,13 @@ export const getOrdersByQuery = async (
   toEnteredTime?: string,
   status?: ORDER_STATUS,
 ) => {
-  return (
+  return instance?.getQuery(
     `/v1/orders?` +
-    (accountId ? `accountId=${accountId}&` : '') +
-    (maxResults ? `maxResults=${maxResults}&` : '') +
-    (fromEnteredTime ? `fromEnteredTime=${fromEnteredTime}&` : '') +
-    (toEnteredTime ? `toEnteredTime=${toEnteredTime}&` : '') +
-    (status ? `status=${status}` : '')
+      (accountId ? `accountId=${accountId}&` : '') +
+      (maxResults ? `maxResults=${maxResults}&` : '') +
+      (fromEnteredTime ? `fromEnteredTime=${fromEnteredTime}&` : '') +
+      (toEnteredTime ? `toEnteredTime=${toEnteredTime}&` : '') +
+      (status ? `status=${status}` : ''),
   );
 };
 
@@ -74,5 +76,5 @@ export const getOrdersByQuery = async (
  * @async
  */
 export const getOrder = async (accountId: string, orderId: string) => {
-  return `/v1/accounts/${accountId}/orders/${orderId}`;
+  return instance?.getQuery(`/v1/accounts/${accountId}/orders/${orderId}`);
 };
