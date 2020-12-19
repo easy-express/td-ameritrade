@@ -2,14 +2,14 @@ import axios from 'axios';
 
 const TD_HOST = `https://api.tdameritrade.com`;
 
-export const getQuery = <T>(query: string, access_token?: string): Promise<T> => {
+export const getQuery = <T>(query: string, accessToken?: string): Promise<T> => {
   return axios
     .get(
       TD_HOST + query,
-      access_token
+      accessToken
         ? {
             headers: {
-              Authorization: `Bearer ${access_token}`,
+              Authorization: `Bearer ${accessToken}`,
             },
           }
         : undefined,

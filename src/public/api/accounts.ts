@@ -72,13 +72,13 @@ export type ProjectedBalances = {
 /**
  * Gets account info for a single account.
  * @param {string} accountID the id of the account to get
- * @param {string} access_token an access token
+ * @param {string} accessToken an access token
  * @param {ACCOUNT_FIELD} fields the additional fields to get from the account
  * @returns {Promise<Account>} the account
  */
 export const getAccount = async (
   accountID: string,
-  access_token: string,
+  accessToken: string,
   fields?: ACCOUNT_FIELD[],
 ): Promise<Account> => {
   let field = '';
@@ -87,21 +87,21 @@ export const getAccount = async (
 
   const query = `/v1/accounts/${accountID}` + (fields ? `?fields=${field}` : '');
 
-  return <Account>(<unknown>getQuery(query, access_token));
+  return getQuery<Account>(query, accessToken);
 };
 
 /**
  * Gets account info for all linked accounts.
- * @param {string} access_token an access token
+ * @param {string} accessToken an access token
  * @param {ACCOUNT_FIELD} fields the additional fields to get from the account
  * @returns {string} the accounts
  */
-export const getAccounts = async (access_token: string, fields?: ACCOUNT_FIELD[]): Promise<Array<Account>> => {
+export const getAccounts = async (accessToken: string, fields?: ACCOUNT_FIELD[]): Promise<Array<Account>> => {
   let field = '';
   fields?.forEach((f) => (field += f + ','));
   field = field.substr(0, field.length - 1);
 
   const query = `/v1/accounts` + (fields ? `?fields=${field}` : '');
 
-  return <Account[]>(<unknown>getQuery(query, access_token));
+  return getQuery<Account[]>(query, accessToken);
 };

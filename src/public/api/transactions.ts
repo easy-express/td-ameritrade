@@ -64,7 +64,7 @@ export interface Instrument {
  * Gets all transactions for a specific account with the set options.
  *
  * @param accountId the id of the account
- * @param {string} access_token an access token
+ * @param {string} accessToken an access token
  * @param type the type of transactions to get
  * @param startDate the date in which to start searching
  * @param endDate the date in which to stop searching
@@ -73,12 +73,12 @@ export interface Instrument {
  */
 export const getTransactions = (
   accountId: string,
-  access_token: string,
+  accessToken: string,
   type?: TRANSACTION_TYPE,
   startDate?: string,
   endDate?: string,
   symbol?: string,
-): Transaction[] => {
+): Promise<Transaction[]> => {
   const query =
     `/v1/accounts/${accountId}/transactions?` +
     (type ? `type=${type}&` : '') +
@@ -86,17 +86,17 @@ export const getTransactions = (
     (endDate ? `endDate=${endDate}&` : '') +
     (symbol ? `symbol=${symbol}` : '');
 
-  return <Transaction[]>(<unknown>getQuery(query, access_token));
+  return getQuery<Transaction[]>(query, accessToken);
 };
 
 /**
  * Get a specific transaction for a specified account
  * @param {string} accountId - the id of the account
  * @param {string} transactionId - the id of the transaction
- * @param {string} access_token an access token
+ * @param {string} accessToken an access token
  * @returns {Transaction} the transaction
  */
-export const getTransaction = (accountId: string, transactionId: string, access_token: string): Transaction => {
+export const getTransaction = (accountId: string, transactionId: string, accessToken: string): Promise<Transaction> => {
   const query = `/v1/accounts/${accountId}/transactions/${transactionId}`;
-  return <Transaction>(<unknown>getQuery(query, access_token));
+  return getQuery<Transaction>(query, accessToken);
 };

@@ -3,7 +3,7 @@ import axios from 'axios';
 import qs from 'qs';
 
 export type Token = {
-  access_token: string;
+  accessToken: string;
   refresh_token: string;
 };
 
@@ -73,7 +73,7 @@ export class TDAmeritradeModule implements IEasyExpressAttachableModule {
     })
       .then((res) => {
         return {
-          access_token: res.data.access_token,
+          accessToken: res.data.accessToken,
           refresh_token: res.data.refresh_token,
         };
       })
