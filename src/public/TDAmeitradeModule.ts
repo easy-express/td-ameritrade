@@ -36,6 +36,7 @@ export class TDAmeritradeModule implements IEasyExpressAttachableModule {
    * Creates a new endpoint for TD Ameritrade to send the auth code.
    *
    * @param server the EasyExpressServer this module is attaching to
+   * @returns {Promise<unknown>} an empty promise that is resolved once the module is attached
    */
   public attachTo(server: EasyExpressServer): Promise<unknown> {
     return new Promise(() => {
@@ -54,10 +55,14 @@ export class TDAmeritradeModule implements IEasyExpressAttachableModule {
 
   /**
    * Gets an access token using the first auth code that was saved from authenticating using TD Ameritrade Auth page.
+   *
+   * @param {string} code a code received from TD Ameritrade (coudl be either a refresh token or an auth code)
+   * @param {boolean} isRefresh whether or not the code is a refresh token or not
+   * @returns {Promise<Token>} a promise that returns a token
    */
-  public getAccessTokenFromCode(authCode: string, isRefresh: boolean): Promise<Token> {
-    authCode = decodeURIComponent(authCode);
-    const data = this.getTokenOptions(authCode, isRefresh);
+  public getAccessTokenFromCode(code: string, isRefresh: boolean): Promise<Token> {
+    code = decodeURIComponent(code);
+    const data = this.getTokenOptions(code, isRefresh);
     return axios({
       method: 'post',
       url: 'https://api.tdameritrade.com/v1/oauth2/token',
@@ -81,8 +86,9 @@ export class TDAmeritradeModule implements IEasyExpressAttachableModule {
   /**
    * Gets the options used to get access tokens.
    *
-   * @param code the code received from TD Ameritrade authentication page
-   * @param refreshToken the refresh token to use to get a new access token
+   * @param {string} code a code received from TD Ameritrade (refresh token or auth code)
+   * @param {boolean} refreshToken whether or not the give code is a refresh token
+   * @returns {string} the stringified token options for queries
    */
   private getTokenOptions(code: string, refreshToken: boolean): string {
     return qs.stringify({
@@ -97,7 +103,9 @@ export class TDAmeritradeModule implements IEasyExpressAttachableModule {
 
   /**
    * Submits a GET query to TD Ameritrade's api.
-   * @param query the query to submit
+   * @param {string} query the query to submit
+   * @param {string} access_token tha access token for authentication
+   * @returns {Promise<any>} returns the GET query results
    */
   public getQuery(query: string, access_token?: string): Promise<any> {
     return axios

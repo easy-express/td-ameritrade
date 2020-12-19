@@ -16,10 +16,14 @@ enum TRANSACTION_TYPE {
 }
 
 /**
- * Gets all transactions for a specific account with the set options, such as symbol, type, startDate (yyyy-MM-dd), endDate (yyyy-MM-dd) (maximum time span is 1 year)
- * @param {Object} config - takes accountId, and optionally: type (ENUM is TRANSACTION_TYPE), startDate (yyyy-MM-dd), endDate (yyyy-MM-dd)
- * @returns {Promise<Object>} api GET result
- * @async
+ * Gets all transactions for a specific account with the set options.
+ *
+ * @param accountId the id of the account
+ * @param type the type of transactions to get
+ * @param startDate the date in which to start searching
+ * @param endDate the date in which to stop searching
+ * @param symbol the transactions related to the given symbol
+ * @returns {string} the api GET query string
  */
 export const getTransactions = (
   accountId: string,
@@ -38,11 +42,11 @@ export const getTransactions = (
 };
 
 /**
- * Get a sepcific transaction for a specified account
- * @param {Object} config - takes accountId, transactionId
- * @returns {Promise<Object>} api GET result
- * @async
+ * Get a specific transaction for a specified account
+ * @param {string} accountId - the id of the account
+ * @param {string} transactionId - the id of the transaction
+ * @returns {string} the api GET query string
  */
-export const getTransaction = (accountId: string, transactionId: string) => {
+export const getTransaction = (accountId: string, transactionId: string): string => {
   return `/v1/accounts/${accountId}/transactions/${transactionId}`;
 };
