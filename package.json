@@ -1,6 +1,6 @@
 {
   "name": "@easy-express/td-ameritrade",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A module that helps integrate TD Ameritrade's API into your Easy-Express Server.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
