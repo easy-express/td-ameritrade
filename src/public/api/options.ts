@@ -193,7 +193,7 @@ export const getOptionChain = async (config: OptionChainArgs, accessToken: strin
     `&optionType=${config.optionType ? config.optionType : OPTION_TYPE.ALL}` +
     `&range=${config.range ? config.range : RANGE.ALL}` +
     `&includeQuotes=true` +
-    (config.daysToExpiration ? `&daysToExpiration=${config.daysToExpiration}` : '');
+    `&daysToExpiration=${config.daysToExpiration ? config.daysToExpiration : 30}`;
 
   return getQuery<OptionChain>(query, accessToken);
 };
